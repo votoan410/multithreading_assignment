@@ -12,19 +12,41 @@ package multithreading_assignment;
 public class TimerAlarm extends Thread {
 
     private int t;//t is time in milliseconds
+    private static String message;
+    
 
-    TimerAlarm(int t) {
+    public static String getMessage() {
+        return message;
+    }
+
+    public static void setMessage(String message) {
+        TimerAlarm.message = message;
+    }
+
+    TimerAlarm(int t, String message) {
         this.t = t;
-        alarmAction(t);
+        this.message = message;
+    }
+    
+    
+    public void alarmAction(){
+         System.out.println(this.message);
     }
 
-    public static void alarmAction(int time) {
-        if (time >= 1) {
-            for (int t = 0; t < time; t++) {
-                System.out.println("time is up ! ");
+    public void run() {
+    
+        try {
+            for (int i = 1; i <= t; i++) {
+                alarmAction();
+                Thread.sleep(1);
             }
+        } catch (InterruptedException exception) {
+            System.out.println("Interupting..");
         }
-
+        System.out.println("Exiting...");
     }
-
 }
+
+
+
+
