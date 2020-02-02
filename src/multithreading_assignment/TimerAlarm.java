@@ -12,31 +12,28 @@ package multithreading_assignment;
 public class TimerAlarm extends Thread {
 
     private int t;//t is time in milliseconds
-    private static String message;
+    private String message;
     
 
-    public static String getMessage() {
-        return message;
-    }
+    
 
-    public static void setMessage(String message) {
-        TimerAlarm.message = message;
-    }
-
-    TimerAlarm(int t, String message) {
+    TimerAlarm(int t, String Message) {
         this.t = t;
-        this.message = message;
+        this.message = Message;
+        System.out.println("create " + this.message);
     }
     
-    
+    //alarmAction method 
     public void alarmAction(){
          System.out.println(this.message);
     }
 
+    @Override
     public void run() {
-    
+         System.out.println("Running: " + this.message);
         try {
-            for (int i = 1; i <= t; i++) {
+            for (int i = 1; i <= 100; i++) {
+                //for every milisecond the alarmAction method is invoked as following
                 alarmAction();
                 Thread.sleep(1);
             }
@@ -45,6 +42,8 @@ public class TimerAlarm extends Thread {
         }
         System.out.println("Exiting...");
     }
+    
+     
 }
 
 
