@@ -10,14 +10,15 @@ package multithreading_assignment;
  * @author timmy
  */
 public class TimerAlarm extends Thread {
-
+    private String name;
     private int t;//t is time in milliseconds
     private String message;
-    
+    private volatile boolean  pause= false;
 
     
 
-    TimerAlarm(int t, String Message) {
+    TimerAlarm(String name, int t, String Message) {
+        this.name = name;
         this.t = t;
         this.message = Message;
         System.out.println("create " + this.message);
@@ -30,10 +31,18 @@ public class TimerAlarm extends Thread {
 
     @Override
     public void run() {
-         System.out.println("Running: " + this.message);
+         System.out.println("Running: " + this.name);
         try {
-            for (int i = 1; i <= 100; i++) {
+           while (true) {
                 //for every milisecond the alarmAction method is invoked as following
+                if(pause()){
+                    try{
+                    System.out.println(" pausing ... " + this.name);
+                    Thread.sleep(100000);
+                    } catch (InterruptedException exception) {
+                        System.out.println(" continuing ... " + this.name);
+                    }
+                }
                 alarmAction();
                 Thread.sleep(1);
             }
@@ -42,7 +51,14 @@ public class TimerAlarm extends Thread {
         }
         System.out.println("Exiting...");
     }
-    
+    public boolean pause(){
+        return pause = true;
+    }
+   
+    public void play(){
+        pause = false;
+        this.interrupt();
+    }
      
 }
 
