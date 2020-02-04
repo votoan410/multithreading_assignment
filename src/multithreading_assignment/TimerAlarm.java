@@ -51,11 +51,11 @@ public class TimerAlarm extends Thread {
         }
         System.out.println("Exiting...");
     }
-    public boolean pause(){
+    public boolean pause(){//pause method 
         return pause = true;
     }
    
-    public void play(){
+    public void play(){//play method
         pause = false;
         this.interrupt();
     }
