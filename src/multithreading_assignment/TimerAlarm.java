@@ -13,7 +13,7 @@ public class TimerAlarm extends Thread {
     private String name;
     private int t;//t is time in milliseconds
     private String message;
-    private volatile boolean  pause= false;
+    private volatile boolean  pause = false;
 
     
 
@@ -33,9 +33,9 @@ public class TimerAlarm extends Thread {
     public void run() {
          System.out.println("Running: " + this.name);
         try {
-           while (true) {
+           for (int i = 0; i < t;i++) {
                 //for every milisecond the alarmAction method is invoked as following
-                if(pause()){
+                if(pause == true){
                     try{
                     System.out.println(" pausing ... " + this.name);
                     Thread.sleep(100000);
@@ -51,6 +51,7 @@ public class TimerAlarm extends Thread {
         }
         System.out.println("Exiting...");
     }
+    
     public boolean pause(){//pause method 
         return pause = true;
     }
