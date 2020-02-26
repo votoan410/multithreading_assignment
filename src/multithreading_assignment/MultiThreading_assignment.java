@@ -40,9 +40,10 @@ public class MultiThreading_assignment {
         obj[2].start();
         obj[1].pause();
         System.out.println("pause() method activated for thread 2 ");
+        System.out.println("Enter p to activated play() method: ");
         Scanner input = new Scanner(System.in);
         String a = input.next();
-        System.out.println("Enter p to activated play() method: ");
+        
         if (a.equals("p")) {
 
             System.out.println("continue");
